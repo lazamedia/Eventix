@@ -185,4 +185,4 @@
 @endsection
 
 
-@section('bawahkelompok3', 'Copyright &copy; 2023 Kelompok 3')
+@section('bawahkelompok3', 'Copyright 2025 Kelompok 3')
