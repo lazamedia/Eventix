@@ -1,10 +1,7 @@
-<style>
-    [x-cloak] { display: none !important; }
-</style>
+<style>[x-cloak] { display: none !important; }</style>
 
     <!-- MINI NAVBAR -->
-    <nav class="hidden mx-auto md:flex items-center justify-between bg-blue-950
-            h-10 w-full px-4 md:px-20 text-white transition-transform duration-300">
+    <nav class="hidden mx-auto md:flex items-center justify-between bg-blue-950 h-10 w-full px-4 md:px-20 text-white transition-transform duration-300">
         <p class="text-xs">Get Your Ticket Everywhere</p>
         <div class="nav-sosmed">
             <ul class="flex space-x-4 md:space-x-8">
@@ -76,17 +73,22 @@
 
             <!-- Desktop Auth Buttons -->
             <div class="hidden lg:flex items-center space-x-4">
-                <p href="#" class="text-sm font-medium text-white border border-white rounded px-4 py-2  transition">Register</p>
+                @if ( Auth::check() )
+                    <!-- logika ketika login -->
+
+                @else
+                    <a href="/register" class="text-sm font-medium text-white border border-white rounded px-4 py-2  transition">Register</a>
+                @endif
                 
-                {{-- cek session apakah ada nim kalo ga ada tampilkan login --}}
-                @if (session()->has('nim'))
-                    {{-- tombol logout --}}
+                @if ( Auth::check() )
+
                     <form action="/logout" method="POST" class="inline">
                         @csrf
                         <button type="submit" class="text-sm font-medium cursor-pointer text-white border border-red-500 rounded px-4 py-2 bg-red-900 hover:bg-red-800 transition">
                             Logout
                         </button>
                     </form>
+
                 @else
                     <a href="/login" class="text-sm font-medium text-white border border-blue-500 rounded px-4 py-2 bg-blue-900 hover:bg-blue-800 transition">
                         Login

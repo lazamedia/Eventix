@@ -38,6 +38,7 @@
           {{ session('error') }}
         </div>
       @endif
+      
     </form>
 
     <div class="text-center text-xs text-gray-400 pt-4 border-t border-gray-200">

@@ -10,6 +10,12 @@
         {{ session('error') }}
     </div>
 @endif
+{{-- session success --}}
+@if (session('success'))
+    <div class="bg-green-700/80 text-white text-center py-3">
+        {{ session('success') }}
+    </div>
+@endif
 
 <div class="bg-gray-50">
 

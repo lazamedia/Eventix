@@ -4,185 +4,233 @@
 
 @section('tengahkelompok3')
 
-<div class="bg-gray-50 border border-x-4 rounded-md border-gray-400 border-x-cyan-700 shadow p-5 flex flex-col sm:flex-row items-center sm:items-start sm:justify-center gap-5 sm:gap-20 max-w-screen-lg mx-5 lg:mx-auto my-5">
-    <img src="{{ session('foto') }}" class="rounded-full w-24 h-24 border border-cyan-500 shadow-md object-cover shadow-cyan-500" alt="Foto Profil">
-    <div class="text-center sm:text-left">
-        <h1 class="text-2xl mb-2 text-gray-950 font-light">Form Pemesanan Tiket</h1>
-        <p class="text-lg font-bold text-gray-700">Nama : {{ session('nama') }}</p>
-        <p class="text-gray-600">NIM : {{ session('nim') }}</p>
-    </div>
-</div>
+<div class="bg-gradient-to-br from-blue-50 to-cyan-50 w-full p-5 min-h-screen">
+  <div class="max-w-screen-xl bg-white mx-auto shadow-xl rounded-2xl border border-gray-200 mt-5 overflow-hidden">
 
-
-<div class="bg-gray-200 w-full p-5">
-  <div class="max-w-screen-lg bg-white mx-auto shadow rounded-lg border border-gray-300 mt-5">
-
-    <div class="w-full bg-blue-950 justify-center items-center rounded-t-lg py-3">
-      <h1 class="text-md font-semibold text-white text-center">Pemesanan Tiket 2025 BTOB FAN-CON 3 2 1 GO! MELympic in JAKARTA</h1>
+    <!-- Header -->
+    <div class="w-full bg-blue-950 justify-center items-center py-4 px-4">
+      <div class="text-center">
+        <h1 class="text-xl font-bold text-white mb-2">Pemesanan Tiket 2025</h1>
+        {{-- <h2 class="text-lg font-medium text-blue-200">BTOB FAN-CON 3 2 1 GO! MELympic in JAKARTA</h2> --}}
+      </div>
     </div>
 
-    <div class="gap-3 grid grid-cols-1 md:grid-cols-2 p-6">
+    <div class="">
+      <!-- Form Section -->
+      <div class="mb-12">
 
-      <!-- Form Input -->
-      <form method="POST" action="{{ url('/buytiket_592') }}" class="">
-        @csrf
-        <div class="space-y-4">
-          <div>
-            <label for="nama_592" class="block text-gray-700 font-semibold mb-1">Nama Lengkap</label>
-            <input type="text" name="nama_592" id="nama_592" value="{{ old('nama_592') }}" required
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 " />
-            @error('nama_592')
-              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-          </div>
 
-          <div>
-            <label for="email_592" class="block text-gray-700 font-semibold mb-1">Email</label>
-            <input type="email" name="email_592" id="email_592" value="{{ old('email_592') }}" required
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 " />
-            @error('email_592')
-              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-          </div>
-
-          <div>
-            <label for="telepon_592" class="block text-gray-700 font-semibold mb-1">Nomor Telepon</label>
-            <input type="text" name="telepon_592" id="telepon_592" value="{{ old('telepon_592') }}" required
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 " />
-            @error('telepon_592')
-              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-          </div>
-
-          <div>
-            <label for="jenis_tiket_592" class="block text-gray-700 font-semibold mb-1">Jenis Tiket</label>
-            <select name="jenis_tiket_592" id="jenis_tiket_592" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ">
-              <option value="regular" {{ old('jenis_tiket_592') == 'regular' ? 'selected' : '' }}>Regular - Rp 350.000</option>
-              <option value="vip" {{ old('jenis_tiket_592') == 'vip' ? 'selected' : '' }}>VIP - Rp 750.000</option>
-              <option value="platinum" {{ old('jenis_tiket_592') == 'platinum' ? 'selected' : '' }}>Platinum - Rp 1.500.000</option>
-            </select>
-            @error('jenis_tiket_592')
-              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-          </div>
-
-          <div>
-              <label for="jumlah_592" class="block text-gray-700 font-semibold mb-1">Jumlah Tiket</label>
-              <input type="number" id="jumlah_592" name="jumlah_592" min="1" max="10" value="{{ old('jumlah_592') }}" required
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 " />
-              @error('jumlah_592')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-              @enderror
-          </div>
-
-          <div>
-            <label for="metode_592" class="block text-gray-700 font-semibold mb-1">Metode Pembayaran</label>
-            <select name="metode_592" id="metode_592" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ">
-              <option value="">Pilih Metode Pembayaran</option>
-              <option value="transfer" {{ old('metode_592') == 'transfer' ? 'selected' : '' }}>Transfer Bank</option>
-              <option value="ewallet" {{ old('metode_592') == 'ewallet' ? 'selected' : '' }}>E-Wallet</option>
-              <option value="credit" {{ old('metode_592') == 'credit' ? 'selected' : '' }}>Kartu Kredit</option>
-            </select>
-            @error('metode_592')
-              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-          </div>
-
-          <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">Beli sekarang</button>
-        </div>
-      </form>
-
-      <!-- Hasil Output dari Object !empty($tampilkan) && count($tampilkan) > 0 -->
-      @if (!empty($tampilkan))
-
-        <div class="w-full">
-          <!-- Menampilkan Output -->
+        <form method="POST" action="{{ url('/buytiket_592') }}" enctype="multipart/form-data" class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+          @csrf
           
-            @foreach ($tampilkan as $data)
-                <div class="w-full">
-                  <div class="relative mx-auto max-w-md transform transition-transform duration-300 overflow-hidden">
-                      <div class="rounded-lg overflow-hidden shadow-xl border-2 border-gray-400">
-                          <div class="bg-cyan-600 p-4 text-left">
-                              <h2 class="text-white text-xl font-bold tracking-wider">2025 BTOB FAN-CON 3 2 1 GO! MELympic in JAKARTA</h2>
-                              <p class="text-gray-200 text-sm">2025</p>
-                          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left Column -->
+            <div class="space-y-6">
+              <!-- Personal Info -->
+              <div class="bg-white rounded-lg p-5 ">
 
-                          <div class="p-5 bg-white bg-opacity-10 backdrop-blur-sm">
-                              <div class="flex justify-between items-center mb-4">
-                                  <div>
-                                      <p class="text-blue-950 text-xs uppercase">Nama</p>
-                                      <p class="text-blue-950 font-bold" id="ticket-name">{{ $data['nama'] }}</p>
-                                  </div>
-                                  <div class="bg-yellow-300 text-black font-bold py-1 px-3 rounded-full text-xs uppercase">{{ $data['jenis_tiket'] }}</div>
-                              </div>
+                
+                <div class="space-y-4">
+                  <div>
+                    <label for="nama_592" class="block text-gray-700 font-medium mb-2">Nama Lengkap</label>
+                    <input type="text" name="nama_592" id="nama_592" value="{{ old('nama_592') }}" required
+                      class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                      placeholder="Masukkan nama lengkap Anda" />
+                    @error('nama_592')
+                      <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                  </div>
 
-                              <div class="flex justify-between mb-4">
-                                  <div>
-                                      <p class="text-blue-950 text-xs uppercase">Email</p>
-                                      <p class="text-blue-950 font-bold">{{ $data['email'] }}</p>
-                                  </div>
-                                  <div>
-                                      <p class="text-blue-950 text-xs uppercase">Jumlah Tiket</p>
-                                      <p class="text-blue-950 font-bold">{{ $data['jumlahTiket'] }}</p>
-                                  </div>
-                              </div>
+                  <div>
+                    <label for="email_592" class="block text-gray-700 font-medium mb-2">Email</label>
+                    <input type="email" name="email_592" id="email_592" value="{{ old('email_592') }}" required
+                      class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                      placeholder="contoh@email.com" />
+                    @error('email_592')
+                      <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                  </div>
 
-                              <div class="mb-4">
-                                  <p class="text-blue-950 text-xs uppercase">Nomor Telepon</p>
-                                  <p class="text-blue-950 font-bold">{{ $data['telepon'] }}</p>
-                              </div>
+                  <div>
+                    <label for="telepon_592" class="block text-gray-700 font-medium mb-2">Nomor Telepon</label>
+                    <input type="text" name="telepon_592" id="telepon_592" value="{{ old('telepon_592') }}" required
+                      class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                      placeholder="08xxxxxxxxxx" />
+                    @error('telepon_592')
+                      <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                  </div>
 
-                              <div>
-                                  <p class="text-blue-950 text-xs uppercase">Pembayaran</p>
-                                  <p class="text-blue-950 font-bold">{{ $data['metodePembayaran'] }}</p>
-                              </div>
-                          </div>
-
-                          <div class="border-t border-dashed border-gray-300 p-4 flex justify-between items-center bg-gray-200">
-                              <div>
-                                  <p class="text-gray-700 text-xs">Powered by</p>
-                                  <p class="text-gray-700 font-bold text-sm">EVENTIX</p>
-                              </div>
-                              <div class="text-blue-950 text-xs">
-                                  <p>Tiket ini adalah bukti sah pembelian</p>
-                                  <p>Dilarang diperjualbelikan kembali</p>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="absolute -left-2 top-1/4 bottom-1/4 flex flex-col justify-around">
-                          <div class="w-4 h-4 bg-white border border-blue-950 rounded-full"></div>
-                          <div class="w-4 h-4 bg-white border border-blue-950 rounded-full"></div>
-                          <div class="w-4 h-4 bg-white border border-blue-950 rounded-full"></div>
-                      </div>
-                      </div>
-
+                  <!-- Upload Foto -->
+                  <div>
+                    <label for="foto_592" class="block text-gray-700 font-medium mb-2">Foto Identitas</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 transition duration-200">
+                      <input type="file" name="foto_592" id="foto_592" accept="image/*"
+                        class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+                      <p class="text-gray-500 text-xs mt-2">Format: JPG, PNG, PDF (Max 2MB)</p>
+                    </div>
+                    @error('foto_592')
+                      <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                  </div>
                 </div>
-            @endforeach          
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-6">
+              <!-- Ticket Info -->
+              <div class="bg-white rounded-lg p-5 ">
+
+
+                <div class="space-y-4">
+                  <div>
+                    <label for="jenis_tiket_592" class="block text-gray-700 font-medium mb-2">Jenis Tiket</label>
+                    <select name="jenis_tiket_592" id="jenis_tiket_592" 
+                      class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                      <option value="">Pilih Jenis Tiket</option>
+                      <option value="regular" {{ old('jenis_tiket_592') == 'regular' ? 'selected' : '' }}>Regular - Rp 350.000</option>
+                      <option value="vip" {{ old('jenis_tiket_592') == 'vip' ? 'selected' : '' }}>VIP - Rp 750.000</option>
+                      <option value="platinum" {{ old('jenis_tiket_592') == 'platinum' ? 'selected' : '' }}>Platinum - Rp 1.500.000</option>
+                    </select>
+                    @error('jenis_tiket_592')
+                      <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                  </div>
+
+                  <div>
+                    <label for="jumlah_592" class="block text-gray-700 font-medium mb-2">Jumlah Tiket</label>
+                    <input type="number" id="jumlah_592" name="jumlah_592" min="1" max="10" value="{{ old('jumlah_592') }}" required
+                      class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                      placeholder="Maksimal 10 tiket" />
+                    @error('jumlah_592')
+                      <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                  </div>
+
+                  <div>
+                    <label for="metode_592" class="block text-gray-700 font-medium mb-2">Metode Pembayaran</label>
+                    <select name="metode_592" id="metode_592" 
+                      class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                      <option value="">Pilih Metode Pembayaran</option>
+                      <option value="transfer" {{ old('metode_592') == 'transfer' ? 'selected' : '' }}>Transfer Bank</option>
+                      <option value="ewallet" {{ old('metode_592') == 'ewallet' ? 'selected' : '' }}>E-Wallet (OVO, GoPay, Dana)</option>
+                      <option value="credit" {{ old('metode_592') == 'credit' ? 'selected' : '' }}>Kartu Kredit</option>
+                    </select>
+                    @error('metode_592')
+                      <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="mt-8 flex justify-center">
+            <button type="submit" 
+              class="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50">
+              <span class="flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Beli Sekarang
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Data Table Section -->
+      <div>
+
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+            <h4 class="text-lg font-semibold text-gray-700">Daftar Pemesanan Tiket</h4>
+          </div>
           
-          <!-- Menampilkan status menggunakan method dari object turunan -->
-          <div class="mt-4">
-            <p class='text-sm text-green-600 text-center'>Pesanan Atas Nama {{ $data['nama'] }}, dengan tipe tiket {{ $data['jenis_tiket'] }} berhasil dibuat ! </p>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telepon</th>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Tiket</th>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Harga</th>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Metode Bayar</th>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Foto</th>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                @forelse($pesanan ?? [] as $index => $item)
+                <tr class="hover:bg-gray-50 transition duration-200">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $index + 1 }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item->nama_592 }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $item->email_592 }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $item->telepon_592 }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full 
+                      @if($item->jenis_tiket_592 == 'regular') bg-green-100 text-green-800
+                      @elseif($item->jenis_tiket_592 == 'vip') bg-blue-100 text-blue-800
+                      @else bg-purple-100 text-purple-800 @endif">
+                      {{ ucfirst($item->jenis_tiket_592) }}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item->jumlah_592 }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    Rp {{ number_format($item->total_harga ?? 0, 0, ',', '.') }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ ucfirst($item->metode_592) }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    @if($item->foto_592)
+                      <img src="{{ asset($item->foto_592) }}" alt="Foto ID" class="w-10 h-10 rounded-full object-cover">
+                    @else
+                      <span class="text-gray-400">-</span>
+                    @endif
+                  </td>
+
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+
+                    <form action="{{ route('item592.delete', $item->id ) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="text-red-500 hover:text-red-600">
+                        delete
+                      </button>
+                    </form>
+
+                  </td>
+                </tr>
+                @empty
+                <tr>
+                  <td colspan="11" class="px-6 py-12 text-center text-gray-500">
+                    <div class="flex flex-col items-center">
+                      <svg class="w-12 h-12 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                      </svg>
+                      <p class="text-lg font-medium">Belum ada data pemesanan</p>
+                      <p class="text-sm">Data pemesanan akan muncul di sini setelah form disubmit</p>
+                    </div>
+                  </td>
+                </tr>
+                @endforelse
+              </tbody>
+            </table>
           </div>
         </div>
-      @else
-
-        <div class="w-full flex items-center justify-center text-gray-500">
-          <p>Output tiket akan muncul di sini setelah form dikirim</p>
-        </div>
-
-      @endif
-
+      </div>
     </div>
   </div>
-
-  <div class="w-full justify-center items-center py-3 text-center my-10">
-    <a href="/" class="text-md font-semibold text-blue-950 text-center bg-white border border-cyan-500 py-2 px-4 rounded">Back Home</a>
-  </div>
-
 </div>
+
 
 @endsection
-
 
 @section('bawahkelompok3', 'Copyright 2025 Kelompok 3')

@@ -3,21 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     public function index()
     {
-        $nim = session('nim');
+            // Memeriksa apakah pengguna sudah login
+    if (Auth::check()) {
+        // Mengambil NIM pengguna yang sedang login
+        $userNim = Auth::user()->nim;
 
-        if ($nim === '2313010592') {
-            return redirect('/buytiket_592'); 
+        // Mengarahkan pengguna berdasarkan NIM
+        if ($userNim == '2313010592') {
+            return redirect('/buytiket_592')->with('success', 'Anda sudah login, mengarahkan ke form beli.');
+        } elseif ($userNim == '2313010588') {
+            return redirect('/tiket_588')->with('success', 'Anda sudah login, mengarahkan ke form create.');
         }
 
-        if ($nim === '2313010588') {
-            return redirect('/tiket_588'); 
-        }
+        // Jika NIM tidak sesuai dengan yang diharapkan, arahkan ke halaman utama
+        return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+    }
 
         return view('login');
     }
@@ -25,42 +33,46 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = [
-            "2313010592"    => [
-                "nim"       => "2313010592",
-                "password"  => "2313010592",
-                "nama"      => "Lazuardi Mandegar",
-                "foto"      => "assets/img/592.jpg",
-                "redirect"  => "/buytiket_592"
-            ],
-            "2313010588"    => [
-                "nim"       => "2313010588",
-                "password"  => "2313010588",
-                "nama"      => "Ardi Mulyana",
-                "foto"      => "assets/img/588.jpg",
-                "redirect"  => "/tiket_588"
-            ],
-        ];
+       $validator = Validator::make($request->all(), [
+           'nim' => 'required',
+           'password' => 'required',
+       ],[
+           'nim.required' => 'NIM harus diisi',
+           'password.required' => 'Password harus diisi',
+       ]);
+       
+       if ($validator->fails()) {
+           return redirect('/login')
+                   ->withErrors($validator)
+                   ->withInput();
+       }
 
-        $nim        = $request->input('nim');
-        $password   = $request->input('password');
-
-        if (isset($credentials[$nim]) && $credentials[$nim]['password'] === $password) {
+       if (Auth::attempt(['nim' => $request->nim, 'password' => $request->password])) {
+            $request->session()->regenerate();
             
-            // Simpan data ke session
-            Session::put('nama' , $credentials[$nim]['nama']);
-            Session::put('nim'  , $nim);
-            Session::put('foto' , $credentials[$nim]['foto']);
+            // Mengambil NIM pengguna yang login
+            $loggedInUserNim = Auth::user()->nim;
 
-            return redirect($credentials[$nim]['redirect']);
+            // Mengarahkan berdasarkan NIM
+            if ($loggedInUserNim == '2313010592') {
+                return redirect('/buytiket_592')->with('success', 'Login berhasil dengan nim '.$request->nim);
+            } elseif ($loggedInUserNim == '2313010588') {
+                return redirect('/tiket_588')->with('success', 'Login berhasil dengan nim '.$request->nim);
+            }
+
+            // Jika NIM tidak cocok dengan keduanya, arahkan ke halaman utama
+            return redirect('/')->with('success', 'Login berhasil dengan nim '.$request->nim);
+
         }
 
-        return back()->with(['error' => 'NIM atau Password salah.'])->withInput();
+       return redirect('/login')->with('error', 'NIM atau password salah');
+
     }
 
     public function logout()
     {
+        Auth::logout();
         Session::flush();
-        return redirect('/login');
+        return redirect('/')->with('success', 'Logout berhasil');
     }
 }
