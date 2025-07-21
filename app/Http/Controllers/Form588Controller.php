@@ -32,68 +32,88 @@ class Form588Controller extends Controller
 
        public function store(Request $request)
         {
+            // validasi input user melalui validator
             $validator = Validator::make($request->all(), [
-                'namaEvent' => 'required|string|max:255',
-                'kategori'  => 'required|string|max:50',
-                'tanggal'   => 'required|date',
-                'lokasi'    => 'required|string|max:255',
-                'harga'     => 'required|integer',
-                'stok'      => 'required|integer',
-                'status'    => 'required|string|max:50',
-                'foto_588'  => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+                'namaEvent_588' => 'required|string|max:255',
+                'kategori_588'  => 'required|string|max:50',
+                'tanggal_588'   => 'required|date',
+                'lokasi_588'    => 'required|string|max:255',
+                'harga_588'     => 'required|integer',
+                'stok_588'      => 'required|integer',
+                'status_588'    => 'required|string|max:50',
+                'foto_588'      => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
             ], [
-                'namaEvent.required' => 'Nama Event harus diisi.',
-                'kategori.required'  => 'Kategori Event harus dipilih.',
-                'tanggal.required'   => 'Tanggal Event harus diisi.',
-                'tanggal.date'       => 'Format tanggal tidak valid.',
-                'lokasi.required'    => 'Lokasi harus diisi.',
-                'harga.required'     => 'Harga Tiket harus diisi.',
-                'harga.integer'      => 'Harga Tiket harus berupa angka.',
-                'stok.required'      => 'Jumlah Stok harus diisi.',
-                'stok.integer'       => 'Jumlah Stok harus berupa angka.',
-                'status.required'    => 'Status Tiket harus dipilih.',
-                'foto_588.image'     => 'Upload harus berupa gambar.',
-                'foto_588.mimes'     => 'Format file tidak valid (jpg,jpeg,png,gif,svg).',
-                'foto_588.max'       => 'Ukuran file maksimal 2MB.',
+                'namaEvent_588.required' => 'Nama Event harus diisi.',
+                'kategori_588.required'  => 'Kategori Event harus dipilih.',
+                'tanggal_588.required'   => 'Tanggal Event harus diisi.',
+                'tanggal_588.date'       => 'Format tanggal tidak valid.',
+                'lokasi_588.required'    => 'Lokasi harus diisi.',
+                'harga_588.required'     => 'Harga Tiket harus diisi.',
+                'harga_588.integer'      => 'Harga Tiket harus berupa angka.',
+                'stok_588.required'      => 'Jumlah Stok harus diisi.',
+                'stok_588.integer'       => 'Jumlah Stok harus berupa angka.',
+                'status_588.required'    => 'Status Tiket harus dipilih.',
+                'foto_588.image'         => 'Upload harus berupa gambar.',
+                'foto_588.mimes'         => 'Format file tidak valid (jpg,jpeg,png,gif,svg).',
+                'foto_588.max'           => 'Ukuran file maksimal 2MB.',
             ]);
 
+            // jika terjadi kesalahan maka kembali ke halaman tadi 
+            // dengan menampilkan kesalahan sesuai validator
             if ($validator->fails()) {
                 return redirect()->back()
                                 ->withErrors($validator)
                                 ->withInput();
             }
+            // jika tidak ada kesalahan maka jalankan proses penyimpanan 
+            else {
+                $namaEvent = $request->namaEvent_588;
+                $kategori  = $request->kategori_588;
+                $tanggal   = $request->tanggal_588;
+                $lokasi    = $request->lokasi_588;
+                $harga     = $request->harga_588;
+                $stok      = $request->stok_588;
+                $status    = $request->status_588;
 
-            $data = $validator->validated();
+                // ambil nim pengguna untuk menentukan direktori penyimpanan
+                $nim = Auth::user()->nim;
+                
+                // misal nim genap maka simpan di direktori genap
+                $directory = ($nim % 2 == 0) ? 'genap' : 'ganjil';
 
-            $nim = Auth::user()->nim;
-            $directory = ($nim % 2 == 0) ? 'genap' : 'ganjil';
+                // variable untuk menyimpan path gambar
+                $fotoPath = null;
 
-            $fotoPath = null;
+                // cek apakah ada file gambar yang diupload
+                // kalo ada maka simpan ke direktori
+                if ($request->hasFile('foto_588')) {
 
-            if ($request->hasFile('foto_588')) {
+                    $foto       = $request->file('foto_588');
 
-                $foto       = $request->file('foto_588');
+                    $fileName   = time() . '.' . $foto->getClientOriginalExtension();
 
-                $fileName   = time() . '.' . $foto->getClientOriginalExtension();
+                    $path       = $foto->storeAs($directory, $fileName); 
 
-                $path       = $foto->storeAs($directory, $fileName); 
+                    $fotoPath   = Storage::url( $path); 
+                }
 
-                $fotoPath   = Storage::url( $path); 
+                $form = new Form588;
+
+                $form->namaEvent = $namaEvent;
+                $form->kategori  = $kategori;
+                $form->tanggal   = $tanggal;
+                $form->lokasi    = $lokasi;
+                $form->harga     = $harga;
+                $form->stok      = $stok;
+                $form->status    = $status;
+                $form->foto      = $fotoPath;
+
+                $form->save();
+
+                return redirect('/tiket_588')->with('success', 'Data berhasil disimpan.');
             }
 
-            Form588::create([
-                'namaEvent' => $data['namaEvent'],
-                'kategori'  => $data['kategori'],
-                'tanggal'   => $data['tanggal'],
-                'lokasi'    => $data['lokasi'],
-                'harga'     => $data['harga'],
-                'stok'      => $data['stok'],
-                'status'    => $data['status'],
-                'foto'      => $fotoPath,
-            ]);
-
-            return redirect()->back()
-                            ->with('success', 'Tiket berhasil dibuat.');
+            
         }
 
         public function destroy($id)

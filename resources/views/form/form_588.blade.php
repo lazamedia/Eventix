@@ -23,103 +23,103 @@
           <!-- Left Column -->
           <div class="space-y-6">
             <div>
-              <label for="namaEvent" class="block text-gray-700 font-medium mb-2">Nama Event</label>
+              <label for="namaEvent_588" class="block text-gray-700 font-medium mb-2">Nama Event</label>
               <input
                 type="text"
-                name="namaEvent"
-                id="namaEvent"
-                value="{{ old('namaEvent') }}"
+                name="namaEvent_588"
+                id="namaEvent_588"
+                value="{{ old('namaEvent_588') }}"
                 required
                 class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                 placeholder="Masukkan nama event" />
-              @error('namaEvent')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+              @error('namaEvent_588')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
-              <label for="kategori" class="block text-gray-700 font-medium mb-2">Kategori Event</label>
+              <label for="kategori_588" class="block text-gray-700 font-medium mb-2">Kategori Event</label>
               <select
-                name="kategori"
-                id="kategori"
+                name="kategori_588"
+                id="kategori_588"
                 required
                 class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
                 <option value="">Pilih Kategori</option>
-                <option value="konser" {{ old('kategori')=='konser'?'selected':'' }}>Konser Musik</option>
-                <option value="festival" {{ old('kategori')=='festival'?'selected':'' }}>Festival</option>
-                <option value="seminar" {{ old('kategori')=='seminar'?'selected':'' }}>Seminar</option>
-                <option value="workshop" {{ old('kategori')=='workshop'?'selected':'' }}>Workshop</option>
-                <option value="pameran" {{ old('kategori')=='pameran'?'selected':'' }}>Pameran</option>
+                <option value="konser" {{ old('kategori_588')=='konser'?'selected':'' }}>Konser Musik</option>
+                <option value="festival" {{ old('kategori_588')=='festival'?'selected':'' }}>Festival</option>
+                <option value="seminar" {{ old('kategori_588')=='seminar'?'selected':'' }}>Seminar</option>
+                <option value="workshop" {{ old('kategori_588')=='workshop'?'selected':'' }}>Workshop</option>
+                <option value="pameran" {{ old('kategori_588')=='pameran'?'selected':'' }}>Pameran</option>
               </select>
-              @error('kategori')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+              @error('kategori_588')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
-              <label for="tanggal" class="block text-gray-700 font-medium mb-2">Tanggal Event</label>
+              <label for="tanggal_588" class="block text-gray-700 font-medium mb-2">Tanggal Event</label>
               <input
                 type="date"
-                name="tanggal"
-                id="tanggal"
-                value="{{ old('tanggal') }}"
+                name="tanggal_588"
+                id="tanggal_588"
+                value="{{ old('tanggal_588') }}"
                 required
                 class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" />
-              @error('tanggal')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+              @error('tanggal_588')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
             </div>
           </div>
 
           <!-- Right Column -->
           <div class="space-y-6">
             <div>
-              <label for="lokasi" class="block text-gray-700 font-medium mb-2">Lokasi</label>
+              <label for="lokasi_588" class="block text-gray-700 font-medium mb-2">Lokasi</label>
               <input
                 type="text"
-                name="lokasi"
-                id="lokasi"
-                value="{{ old('lokasi') }}"
+                name="lokasi_588"
+                id="lokasi_588"
+                value="{{ old('lokasi_588') }}"
                 required
                 class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                 placeholder="Masukkan lokasi event" />
-              @error('lokasi')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+              @error('lokasi_588')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
-              <label for="harga" class="block text-gray-700 font-medium mb-2">Harga Tiket (Rp)</label>
+              <label for="harga_588" class="block text-gray-700 font-medium mb-2">Harga Tiket (Rp)</label>
               <input
                 type="number"
-                name="harga"
-                id="harga"
-                value="{{ old('harga') }}"
+                name="harga_588"
+                id="harga_588"
+                value="{{ old('harga_588') }}"
                 required
                 class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-                placeholder="Masukkan harga tiket" />
-              @error('harga')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+                placeholder="Masukkan harga_588 tiket" />
+              @error('harga_588')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
-              <label for="stok" class="block text-gray-700 font-medium mb-2">Jumlah Stok</label>
+              <label for="stok_588" class="block text-gray-700 font-medium mb-2">Jumlah Stok</label>
               <input
                 type="number"
-                name="stok"
-                id="stok"
-                value="{{ old('stok') }}"
+                name="stok_588"
+                id="stok_588"
+                value="{{ old('stok_588') }}"
                 required
                 class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-                placeholder="Masukkan jumlah stok" />
-              @error('stok')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+                placeholder="Masukkan jumlah stok_588" />
+              @error('stok_588')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
-              <label for="status" class="block text-gray-700 font-medium mb-2">Status Tiket</label>
+              <label for="status_588" class="block text-gray-700 font-medium mb-2">Status Tiket</label>
               <select
-                name="status"
-                id="status"
+                name="status_588"
+                id="status_588"
                 required
                 class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
                 <option value="">Pilih Status</option>
-                <option value="tersedia" {{ old('status')=='tersedia'?'selected':'' }}>Tersedia</option>
-                <option value="segera" {{ old('status')=='segera'?'selected':'' }}>Segera Hadir</option>
-                <option value="terbatas" {{ old('status')=='terbatas'?'selected':'' }}>Stok Terbatas</option>
-                <option value="habis" {{ old('status')=='habis'?'selected':'' }}>Habis</option>
+                <option value="tersedia" {{ old('status_588')=='tersedia'?'selected':'' }}>Tersedia</option>
+                <option value="segera" {{ old('status_588')=='segera'?'selected':'' }}>Segera Hadir</option>
+                <option value="terbatas" {{ old('status_588')=='terbatas'?'selected':'' }}>Stok Terbatas</option>
+                <option value="habis" {{ old('status_588')=='habis'?'selected':'' }}>Habis</option>
               </select>
-              @error('status')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+              @error('status_588')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
             </div>
 
             <!-- Upload Foto -->
