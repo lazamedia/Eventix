@@ -7,19 +7,66 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# EVENTIX By - Kelompok 3
-Sebuah sistem pembelelian tiket secara online yang mengharuskan user untuk login setiap mengakses formnya, dalam sistem ini kita menggunakan session untuk menyimpan data user dan menggunakan class, object, serta model .
+## EVENTIX By - Kelompok 3
+**Eventix** adalah sistem pembelian tiket online yang mengharuskan user login setiap kali mengakses form.  
+Kami menggunakan session untuk menyimpan data user, serta memanfaatkan konsep class, object, dan model di Laravel.
 
 ### Apa yang dibuat?
-- model : untuk penemptan class setiap formnya
-- controller : untuk menangani validasi form dll
-- web : untuk routing setiap halamannya
-- view : untuk menampilkan halamannya
+- **Model**             : mengelola struktur data dan interaksi dengan database.  
+- **Controller**        : menangani logika validasi dan alur permintaan (request).  
+- **View**              : menampilkan antarmuka ke pengguna.  
+- **Routes (web.php)**  : mendefinisikan URL dan menghubungkannya ke controller.
+
 
 ### Cara Instalasi 
----
+
+1. **Clone Repository**
+
+```bash
+git clone https://github.com/lazamedia/Eventix.git
+```
+
+```bash
+cd eventix
+```
+
+```bash
+composer install
+```
+
+```bash
+cp .env.example .env
+```
+
+
+2. **Buka `.env` lalu ubah baris berikut sesuai dengan databasemu yang ingin dipakai**
+
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=Eventix
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+3. **Instalasi website**
+
+```bash
+php artisan key:generate
+```
+
+```bash
+php artisan migrate --seed
+```
+
+
+4. **Jalankan website**
+
+```bash
+php artisan serve
+```
 
 
 ## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
