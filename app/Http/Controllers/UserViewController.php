@@ -14,19 +14,6 @@ class UserViewController extends Controller
         return view('user', compact('user_view'));
     }
 
-    public function edit($id)
-    {
-        $user = UserModel::findOrFail($id);
-        return response()->json($user);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $user = UserModel::findOrFail($id);
-        $user->update($request->only('nama', 'email','nim',  'hak_akses', 'foto'));
-
-        return redirect()->route('user.index')->with('success', 'Data pengguna berhasil diupdate');
-    }
 
     public function destroy($id)
     {
@@ -36,6 +23,7 @@ class UserViewController extends Controller
             
             $fotoPath = str_replace('/storage/', '', $user->foto); 
             Storage::delete($fotoPath);  
+            
         }
 
         $user->delete();
